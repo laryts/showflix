@@ -2,7 +2,12 @@ import mongoose from 'mongoose';
 
 const MovieSchema = new mongoose.Schema(
   {
-    imdbID: String,
+    imdbID: {
+      type: String,
+      unique: true,
+    },
+    poster: String,
+    title: String,
     like: {
       type: Boolean,
       default: false,

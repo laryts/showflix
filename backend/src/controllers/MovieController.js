@@ -8,9 +8,15 @@ class MovieController {
   }
 
   async store(req, res) {
-    const { imdbID } = req.body;
+    const movieExists = Movie.find().where({ imdbID: req.body.imdbID });
+    if (movieExists) {
+      return res.status(501).json({ message: 'Movie already added' });
+    }
+    const { imdbID, poster, title } = req.body;
     const movie = await Movie.create({
       imdbID,
+      poster,
+      title,
     });
 
     req.io.emit('movie', movie);
