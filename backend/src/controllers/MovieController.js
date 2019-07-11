@@ -8,10 +8,12 @@ class MovieController {
   }
 
   async store(req, res) {
-    const movieExists = Movie.find().where({ imdbID: req.body.imdbID });
-    if (movieExists) {
-      return res.status(501).json({ message: 'Movie already added' });
-    }
+    // console.log('TCL: req', req.body);
+    // const movieExists = Movie.find().where({ imdbID: req.body.imdbID });
+    // console.log('TCL: MovieController -> store -> movieExists', movieExists);
+    // if (movieExists) {
+    //   return res.status(501).json({ message: 'Movie already added' });
+    // }
     const { imdbID, poster, title } = req.body;
     const movie = await Movie.create({
       imdbID,
